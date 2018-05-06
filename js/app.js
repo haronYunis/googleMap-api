@@ -4,7 +4,7 @@
 // }
 
 
- function initMap() {
+function initMap() {
   let options = {
     center: { lat: 42.4668, lng: -70.9495 },
     zoom: 8
@@ -58,25 +58,21 @@
       })
     }
   }
+// If request for location is accepted run succes function
+  function success(position) {
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+    let coords = new google.maps.LatLng(lat, long);
+    addMarker({coords: coords})
+  }
+// If denied run failure function.
+  function failure() {
+    console.log('Error! Cannot retrieve user location');
+  }
+
+  // Listening for click event on selected element
+  document.getElementById('get_location').onclick = function () {
+    // Ask to get user location data
+    navigator.geolocation.getCurrentPosition(success, failure);
+  };
 }
-
-
-function success(position) {
-  let lat = position.coords.latitude;
-  let long = position.coords.longitude;
-  let coords = new google.maps.LatLng(lat, long);
-  console.log(coords)
-  console.log(lat + ', ' + long);
-  // let marker = new google.maps.Marker({ map: map, position: coords });
-
-}
-
-function failure() {
-  console.log('Error! Cannot retrieve user location');
-}
-
-document.getElementById('get_location').onclick = function () {
-  navigator.geolocation.getCurrentPosition(success, failure);
-
-};
-
