@@ -21,7 +21,26 @@
   </style>
 </head>
 <body>
+  <a href="#" id="get_location">Get location</a>
   <div id="map"></div>
+
+  <!-- <script type="text/javascript">
+  var c = function (pos) {
+    var lat = pos.coords.latitude,
+        long = pos.coords.longitude,
+        coords = lat + ',' + long;
+        console.log(coords)
+  }
+  document.getElementById('get_location').onclick = function () {
+    navigator.geolocation.getCurrentPosition(c);
+    return false;
+  } -->
+    
+  </script>
+
+  
+  
+
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKQx3sj8oxXTYjky297ZZmBagiCzN-_7I&callback=initMap"
   async defer></script>
   <script src="js/app.js"></script>

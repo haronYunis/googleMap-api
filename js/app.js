@@ -56,3 +56,20 @@ function initMap() {
   }
 }
 
+
+document.getElementById('get_location').onclick = function(){
+  navigator.geolocation.getCurrentPosition(c);
+ 
+  function c(pos){
+    var coordinate = {
+      lat: pos.coords.latitude,
+      long: pos.coords.longitude,
+      coords = lat + ', ' + long
+    }
+    addMarker(pos.coords);
+    console.log(coords);
+  }
+  
+  return false;
+}
+
