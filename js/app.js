@@ -1,11 +1,15 @@
+// function Map(map, options) {
+//   this.map = map,
+//   this.options = options
+// }
 
 
-function initMap() {
+ function initMap() {
   let options = {
     center: { lat: 42.4668, lng: -70.9495 },
     zoom: 8
   };
-  const map = new google.maps.Map(document.getElementById('map'), options);
+  let map = new google.maps.Map(document.getElementById('map'), options);
 
   //Add a marker onclick
   google.maps.event.addListener(map, 'click',
@@ -18,7 +22,7 @@ function initMap() {
   const markers = [
     {
       coords: { lat: 42.4668, lng: -70.9495 },
-      iconImg:'http://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+      iconImg: 'http://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
       content: '<h1>Lynn MA</h1>'
     },
     {
@@ -57,19 +61,22 @@ function initMap() {
 }
 
 
-document.getElementById('get_location').onclick = function(){
-  navigator.geolocation.getCurrentPosition(c);
- 
-  function c(pos){
-    var coordinate = {
-      lat: pos.coords.latitude,
-      long: pos.coords.longitude,
-      coords = lat + ', ' + long
-    }
-    addMarker(pos.coords);
-    console.log(coords);
-  }
-  
-  return false;
+function success(position) {
+  let lat = position.coords.latitude;
+  let long = position.coords.longitude;
+  let coords = new google.maps.LatLng(lat, long);
+  console.log(coords)
+  console.log(lat + ', ' + long);
+  // let marker = new google.maps.Marker({ map: map, position: coords });
+
 }
+
+function failure() {
+  console.log('Error! Cannot retrieve user location');
+}
+
+document.getElementById('get_location').onclick = function () {
+  navigator.geolocation.getCurrentPosition(success, failure);
+
+};
 
